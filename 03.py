@@ -4,10 +4,10 @@ import re
 import typing
 
 
-PATTERN = re.compile("mul\((\d+),(\d+)\)")
+PATTERN = re.compile(r"mul\((\d+),(\d+)\)")
 
 
-def iter_multiples(path_to_input: str) -> typing.Iterator[tuple[int, int]]:
+def iter_multiples(path_to_input: str) -> typing.Iterator[tuple[int, ...]]:
     with open(file=path_to_input) as f:
         for match in PATTERN.finditer(string=f.read()):
             yield tuple(map(int, match.groups()))
@@ -21,7 +21,7 @@ def part_one(path_to_input: str) -> int:
     return sum(products)
 
 
-def iter_conditional_multiples(path_to_input: str) -> typing.Iterator[tuple[int, int]]:
+def iter_conditional_multiples(path_to_input: str) -> typing.Iterator[tuple[int, ...]]:
     with open(file=path_to_input) as f:
         payload = f.read()
     for dos in payload.split("do()"):

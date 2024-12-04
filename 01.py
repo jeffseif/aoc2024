@@ -1,10 +1,11 @@
 import collections
+
 import more_itertools
 
 PATH_TO_INPUT = "01.input"
 
 
-def read_column_ints(path_to_input: str) -> tuple[list[int], list[int]]:
+def read_column_ints(path_to_input: str) -> tuple[list[int], ...]:
     with open(file=path_to_input) as f:
         rows = (tuple(map(int, line.split())) for line in f)
         columns = more_itertools.unzip(rows)
@@ -17,7 +18,7 @@ def part_one(path_to_input: str) -> int:
     return sum(distances)
 
 
-def part_two(path_to_input: str) -> None:
+def part_two(path_to_input: str) -> int:
     lefts, rights = map(
         collections.Counter, read_column_ints(path_to_input=path_to_input)
     )
