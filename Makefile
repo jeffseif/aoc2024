@@ -2,14 +2,14 @@ PYTHON = $(shell which python3.11)
 SHELL = /bin/bash
 VENV_DIR = .venv
 
-DAY_TO_PY_MODULE = $(patsubst %.day,%,$@)
+FILE_TO_PY_MODULE = $(patsubst %.py,%,$@)
 
 .PHONY: all
-all: $(wildcard *.day)
+all: $(wildcard *.py)
 
-%.day: install
-	# Day $(DAY_TO_PY_MODULE)
-	@$(VENV_DIR)/bin/python -m $(DAY_TO_PY_MODULE)
+%.py: install
+	# Day $(FILE_TO_PY_MODULE)
+	@$(VENV_DIR)/bin/python -m $(FILE_TO_PY_MODULE)
 
 .PHONY: install
 install: $(VENV_DIR)
