@@ -20,6 +20,10 @@ $(VENV_DIR): requirements.txt
 	@$(VENV_DIR)/bin/python -m pip install --quiet --requirement=$<
 	touch $@
 
+.PHONY: repl
+repl: $(VENV_DIR)
+	@$</bin/python
+
 .PHONY: lint
 lint: $(VENV_DIR)
 	@$</bin/python -m pip install --quiet pre-commit
