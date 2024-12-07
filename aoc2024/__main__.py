@@ -15,16 +15,15 @@ def iter_day_module() -> typing.Iterator[tuple[int, types.ModuleType]]:
         yield int(day), importlib.import_module(name=f"aoc2024.{name:s}")
 
 
-def run_module(day: int, debug: bool, module: types.ModuleType) -> None:
+def run_module(day: int, module: types.ModuleType) -> None:
     print(f"> Day {day:d}")
     path_to_input = str(pathlib.Path(__file__).parent / f"input{day:02d}.txt")
     for task in (module.part_one, module.part_two):
-        print(task(debug=debug, path_to_input=path_to_input))
+        print(task(path_to_input=path_to_input))
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--debug", action="store_true")
     parser.add_argument("--do-slow-tasks", action="store_true")
     parser.add_argument("--day", action="append", default=[], type=int)
     args = parser.parse_args()
@@ -35,7 +34,6 @@ def main() -> int:
     for day in sorted(args.day or day_to_module):
         run_module(
             day=day,
-            debug=args.debug,
             module=day_to_module[day],
         )
     return 0

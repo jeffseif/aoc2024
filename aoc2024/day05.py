@@ -32,7 +32,7 @@ def get_middle(it: typing.Sequence[int]) -> int:
     return it[len(it) // 2]
 
 
-def part_one(debug: bool, path_to_input: str) -> int:
+def part_one(path_to_input: str) -> int:
     orders_and_updates = get_orders_and_updates(path_to_input=path_to_input)
     return sum(
         get_middle(it=update)
@@ -53,7 +53,7 @@ def swap_sort(
     return update
 
 
-def part_two(debug: bool, path_to_input: str) -> int:
+def part_two(path_to_input: str) -> int:
     orders_and_updates = get_orders_and_updates(path_to_input=path_to_input)
     return sum(
         get_middle(it=swap_sort(orders=orders_and_updates.orders, update=update))

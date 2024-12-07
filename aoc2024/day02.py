@@ -18,14 +18,14 @@ def iter_diff(it: typing.Iterable[int]) -> typing.Iterator[int]:
         yield left - right
 
 
-def part_one(debug: bool, path_to_input: str) -> int:
+def part_one(path_to_input: str) -> int:
     safe = 0
     for row in iter_row(path_to_input=path_to_input):
         safe += is_safe(iter_diff(row))
     return safe
 
 
-def part_two(debug: bool, path_to_input: str) -> int:
+def part_two(path_to_input: str) -> int:
     safe = 0
     for row in iter_row(path_to_input=path_to_input):
         safe += is_safe(iter_diff(row)) or any(

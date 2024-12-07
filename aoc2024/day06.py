@@ -1,6 +1,7 @@
 from __future__ import annotations
 import dataclasses
 import itertools
+import os
 import time
 import typing
 import aoc2024
@@ -117,19 +118,24 @@ class State:
         )
 
 
+def get_debug() -> bool:
+    return os.environ.get("DEBUG", "0") == "1"
+
+
 DELAY_SECONDS = 0.005
 
 
-def part_one(debug: bool, path_to_input: str) -> int:
+def part_one(path_to_input: str) -> int:
     return aoc2024.count(
         State.from_path_to_input(path_to_input=path_to_input).iter_coordinates(
-            debug=debug
+            debug=get_debug()
         )
     )
 
 
 @aoc2024.skip_slow
-def part_two(debug: bool, path_to_input: str) -> int:
+def part_two(path_to_input: str) -> int:
+    debug = get_debug()
     unobstructed = State.from_path_to_input(path_to_input=path_to_input)
     loops = 0
     for obstacle in unobstructed.iter_coordinates(debug=debug):

@@ -44,7 +44,7 @@ def get_equations(path_to_input: str) -> list[Equation]:
         return list(map(Equation.from_line, f))
 
 
-def part_one(debug: bool, path_to_input: str) -> int:
+def part_one(path_to_input: str) -> int:
     equations = get_equations(path_to_input=path_to_input)
     return sum(
         equation.expected
@@ -59,7 +59,7 @@ def concat(a: int, b: int) -> int:
 
 
 @aoc2024.skip_slow
-def part_two(debug: bool, path_to_input: str) -> int:
+def part_two(path_to_input: str) -> int:
     equations = get_equations(path_to_input=path_to_input)
     return sum(
         equation.expected

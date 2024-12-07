@@ -52,7 +52,7 @@ def iter_re_overlapping(
             yield match.group()
 
 
-def part_one(debug: bool, path_to_input: str) -> int:
+def part_one(path_to_input: str) -> int:
     inp = Input.from_path_to_input(path_to_input=path_to_input)
 
     finditer = functools.partial(
@@ -79,7 +79,7 @@ def iter_pattern_two(width: int) -> typing.Iterator[str]:
         yield ".".join((a, b, middle, c, d))
 
 
-def part_two(debug: bool, path_to_input: str) -> int:
+def part_two(path_to_input: str) -> int:
     inp = Input.from_path_to_input(path_to_input=path_to_input)
     finditer = functools.partial(
         iter_re_overlapping,

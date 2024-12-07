@@ -13,7 +13,7 @@ def iter_multiples(path_to_input: str) -> typing.Iterator[tuple[int, ...]]:
             yield tuple(map(int, match.groups()))
 
 
-def part_one(debug: bool, path_to_input: str) -> int:
+def part_one(path_to_input: str) -> int:
     products = itertools.starmap(
         operator.mul,
         iter_multiples(path_to_input=path_to_input),
@@ -30,7 +30,7 @@ def iter_conditional_multiples(path_to_input: str) -> typing.Iterator[tuple[int,
             yield tuple(map(int, match.groups()))
 
 
-def part_two(debug: bool, path_to_input: str) -> int:
+def part_two(path_to_input: str) -> int:
     products = itertools.starmap(
         operator.mul,
         iter_conditional_multiples(path_to_input=path_to_input),
