@@ -1,7 +1,26 @@
+from __future__ import annotations
+import dataclasses
 import functools
 import itertools
 import re
 import typing
+
+import aoc2024
+
+
+@dataclasses.dataclass
+class Input:
+    payload: str
+    width: int
+
+    @classmethod
+    def from_path_to_input(cls, path_to_input: str) -> Input:
+        with open(file=path_to_input) as f:
+            payload = f.read()
+        return cls(
+            payload=payload,
+            width=len(next(iter(payload.splitlines()))),
+        )
 
 
 def iter_pattern_one(width: int) -> typing.Iterator[str]:
@@ -33,22 +52,16 @@ def iter_re_overlapping(
             yield match.group()
 
 
-def count(it: typing.Iterable) -> int:
-    count = 0
-    for _ in it:
-        count += 1
-    return count
-
-
-def part_one(path_to_input: str, width: int) -> int:
-    with open(file=path_to_input) as f:
-        payload = f.read()
+def part_one(debug: bool, path_to_input: str) -> int:
+    inp = Input.from_path_to_input(path_to_input=path_to_input)
 
     finditer = functools.partial(
         iter_re_overlapping,
-        string=(" " * width).join(payload.splitlines()),
+        string=(" " * inp.width).join(inp.payload.splitlines()),
     )
-    return count(itertools.chain(*map(finditer, iter_pattern_one(width=width))))
+    return aoc2024.count(
+        itertools.chain(*map(finditer, iter_pattern_one(width=inp.width)))
+    )
 
 
 def iter_pattern_two(width: int) -> typing.Iterator[str]:
@@ -66,21 +79,12 @@ def iter_pattern_two(width: int) -> typing.Iterator[str]:
         yield ".".join((a, b, middle, c, d))
 
 
-def part_two(path_to_input: str, width: int) -> int:
-    with open(file=path_to_input) as f:
-        payload = f.read()
+def part_two(debug: bool, path_to_input: str) -> int:
+    inp = Input.from_path_to_input(path_to_input=path_to_input)
     finditer = functools.partial(
         iter_re_overlapping,
-        string=(" " * width).join(payload.splitlines()),
+        string=(" " * inp.width).join(inp.payload.splitlines()),
     )
-    return count(itertools.chain(*map(finditer, iter_pattern_two(width=width))))
-
-
-def main() -> int:
-    print(part_one(path_to_input="04.input", width=140))
-    print(part_two(path_to_input="04.input", width=140))
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+    return aoc2024.count(
+        itertools.chain(*map(finditer, iter_pattern_two(width=inp.width)))
+    )

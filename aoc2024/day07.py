@@ -3,8 +3,8 @@ import dataclasses
 import itertools
 import math
 import operator
-import os
 import typing
+import aoc2024
 
 
 @dataclasses.dataclass
@@ -44,7 +44,7 @@ def get_equations(path_to_input: str) -> list[Equation]:
         return list(map(Equation.from_line, f))
 
 
-def part_one(path_to_input: str) -> int:
+def part_one(debug: bool, path_to_input: str) -> int:
     equations = get_equations(path_to_input=path_to_input)
     return sum(
         equation.expected
@@ -53,24 +53,13 @@ def part_one(path_to_input: str) -> int:
     )
 
 
-def skip_slow(f):
-    if os.environ.get("DO_SLOW") == "1":
-        return f
-    else:
-
-        def inner(*args, **kwargs) -> str:
-            return "<SKIPPED>"
-
-        return inner
-
-
 def concat(a: int, b: int) -> int:
     digits = int(math.log10(b) + 1)
     return (10**digits * a) + b
 
 
-@skip_slow
-def part_two(path_to_input: str) -> int:
+@aoc2024.skip_slow
+def part_two(debug: bool, path_to_input: str) -> int:
     equations = get_equations(path_to_input=path_to_input)
     return sum(
         equation.expected
@@ -79,13 +68,3 @@ def part_two(path_to_input: str) -> int:
             operators=(operator.add, operator.mul, concat),
         )
     )
-
-
-def main() -> int:
-    print(part_one(path_to_input="07.input"))
-    print(part_two(path_to_input="07.input"))
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())

@@ -1,9 +1,9 @@
 from __future__ import annotations
 import dataclasses
 import itertools
-import os
 import time
 import typing
+import aoc2024
 
 
 @dataclasses.dataclass(order=True, unsafe_hash=True)
@@ -87,7 +87,7 @@ class State:
         ]
         return "\n" + "\n".join(" ".join(row) for row in basemap)
 
-    def iter_coordinates(self, display: bool) -> typing.Iterator[Coordinate]:
+    def iter_coordinates(self, debug: bool) -> typing.Iterator[Coordinate]:
         seen = {self.position}
         while True:
             if (step := next(self)).is_escaped:
@@ -97,7 +97,7 @@ class State:
             else:
                 self = step
             seen.add(self.position)
-            if display:
+            if debug:
                 print(self)
                 time.sleep(DELAY_SECONDS)
         yield from sorted(seen)
@@ -120,38 +120,20 @@ class State:
 DELAY_SECONDS = 0.005
 
 
-def count(it: typing.Iterable) -> int:
-    count = 0
-    for _ in it:
-        count += 1
-    return count
-
-
-def part_one(display: bool, path_to_input: str) -> int:
-    return count(
+def part_one(debug: bool, path_to_input: str) -> int:
+    return aoc2024.count(
         State.from_path_to_input(path_to_input=path_to_input).iter_coordinates(
-            display=display
+            debug=debug
         )
     )
 
 
-def skip_slow(f):
-    if os.environ.get("DO_SLOW") == "1":
-        return f
-    else:
-
-        def inner(*args, **kwargs) -> str:
-            return "<SKIPPED>"
-
-        return inner
-
-
-@skip_slow
-def part_two(display: bool, path_to_input: str) -> int:
+@aoc2024.skip_slow
+def part_two(debug: bool, path_to_input: str) -> int:
     unobstructed = State.from_path_to_input(path_to_input=path_to_input)
     loops = 0
-    for obstacle in unobstructed.iter_coordinates(display=display):
-        if display:
+    for obstacle in unobstructed.iter_coordinates(debug=debug):
+        if debug:
             print(obstacle)
         obstructed = unobstructed.with_obstacle(obstacle=obstacle)
         seen = {(obstructed.position, obstructed.direction)}
@@ -166,17 +148,7 @@ def part_two(display: bool, path_to_input: str) -> int:
             else:
                 obstructed = step
             seen.add((obstructed.position, obstructed.direction))
-            if display:
+            if debug:
                 print(obstructed)
                 time.sleep(DELAY_SECONDS)
     return loops
-
-
-def main() -> int:
-    print(part_one(display=False, path_to_input="06.input"))
-    print(part_two(display=False, path_to_input="06.input"))
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
