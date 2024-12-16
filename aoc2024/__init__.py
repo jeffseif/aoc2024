@@ -1,5 +1,22 @@
+import functools
 import os
 import typing
+
+
+def expects(expected: int):
+    def decorator(f):
+        @functools.wraps(f)
+        def inner(*args, **kwargs):
+            if (ret := f(*args, **kwargs)) != expected:
+                raise ValueError(f"{expected=:d} but got {ret=:d} instead")
+            else:
+                return ret
+
+        inner.__expected = expected
+        return inner
+
+    return decorator
+
 
 DO_SLOW_TASKS_ENVVAR = "DO_SLOW_TASKS"
 
@@ -10,7 +27,7 @@ def skip_slow(f):
     else:
 
         def inner(*args, **kwargs) -> str:
-            return "<SKIPPED>"
+            return f.__expected
 
         return inner
 

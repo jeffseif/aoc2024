@@ -3,6 +3,8 @@ import operator
 import re
 import typing
 
+import aoc2024
+
 
 PATTERN = re.compile(r"mul\((\d+),(\d+)\)")
 
@@ -13,6 +15,7 @@ def iter_multiples(path_to_input: str) -> typing.Iterator[tuple[int, ...]]:
             yield tuple(map(int, match.groups()))
 
 
+@aoc2024.expects(174336360)
 def part_one(path_to_input: str) -> int:
     products = itertools.starmap(
         operator.mul,
@@ -30,6 +33,7 @@ def iter_conditional_multiples(path_to_input: str) -> typing.Iterator[tuple[int,
             yield tuple(map(int, match.groups()))
 
 
+@aoc2024.expects(88802350)
 def part_two(path_to_input: str) -> int:
     products = itertools.starmap(
         operator.mul,

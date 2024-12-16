@@ -125,6 +125,7 @@ def get_debug() -> bool:
 DELAY_SECONDS = 0.005
 
 
+@aoc2024.expects(5318)
 def part_one(path_to_input: str) -> int:
     return aoc2024.count(
         State.from_path_to_input(path_to_input=path_to_input).iter_coordinates(
@@ -134,6 +135,7 @@ def part_one(path_to_input: str) -> int:
 
 
 @aoc2024.skip_slow
+@aoc2024.expects(1831)
 def part_two(path_to_input: str) -> int:
     debug = get_debug()
     unobstructed = State.from_path_to_input(path_to_input=path_to_input)

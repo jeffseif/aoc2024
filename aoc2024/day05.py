@@ -3,6 +3,8 @@ import dataclasses
 import itertools
 import typing
 
+import aoc2024
+
 
 @dataclasses.dataclass
 class OrdersAndUpdates:
@@ -32,6 +34,7 @@ def get_middle(it: typing.Sequence[int]) -> int:
     return it[len(it) // 2]
 
 
+@aoc2024.expects(4774)
 def part_one(path_to_input: str) -> int:
     orders_and_updates = get_orders_and_updates(path_to_input=path_to_input)
     return sum(
@@ -53,6 +56,7 @@ def swap_sort(
     return update
 
 
+@aoc2024.expects(6004)
 def part_two(path_to_input: str) -> int:
     orders_and_updates = get_orders_and_updates(path_to_input=path_to_input)
     return sum(

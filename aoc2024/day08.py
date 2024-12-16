@@ -66,6 +66,7 @@ def get_freq_to_antenna_grid(path_to_input: str) -> dict[str, AntennaGrid]:
     }
 
 
+@aoc2024.expects(222)
 def part_one(path_to_input: str) -> int:
     freq_to_antenna_grid = get_freq_to_antenna_grid(path_to_input=path_to_input)
     antinodes = {
@@ -76,6 +77,7 @@ def part_one(path_to_input: str) -> int:
     return aoc2024.count(antinodes)
 
 
+@aoc2024.expects(884)
 def part_two(path_to_input: str) -> int:
     freq_to_antenna_grid = get_freq_to_antenna_grid(path_to_input=path_to_input)
     antinodes = {

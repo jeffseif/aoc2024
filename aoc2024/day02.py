@@ -2,6 +2,8 @@ import typing
 
 import more_itertools
 
+import aoc2024
+
 
 def iter_row(path_to_input: str) -> typing.Iterator[tuple[int, ...]]:
     with open(file=path_to_input) as f:
@@ -18,6 +20,7 @@ def iter_diff(it: typing.Iterable[int]) -> typing.Iterator[int]:
         yield left - right
 
 
+@aoc2024.expects(252)
 def part_one(path_to_input: str) -> int:
     safe = 0
     for row in iter_row(path_to_input=path_to_input):
@@ -25,6 +28,7 @@ def part_one(path_to_input: str) -> int:
     return safe
 
 
+@aoc2024.expects(324)
 def part_two(path_to_input: str) -> int:
     safe = 0
     for row in iter_row(path_to_input=path_to_input):

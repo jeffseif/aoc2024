@@ -52,6 +52,7 @@ def iter_re_overlapping(
             yield match.group()
 
 
+@aoc2024.expects(2557)
 def part_one(path_to_input: str) -> int:
     inp = Input.from_path_to_input(path_to_input=path_to_input)
 
@@ -79,6 +80,7 @@ def iter_pattern_two(width: int) -> typing.Iterator[str]:
         yield ".".join((a, b, middle, c, d))
 
 
+@aoc2024.expects(1854)
 def part_two(path_to_input: str) -> int:
     inp = Input.from_path_to_input(path_to_input=path_to_input)
     finditer = functools.partial(

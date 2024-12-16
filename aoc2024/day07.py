@@ -44,6 +44,7 @@ def get_equations(path_to_input: str) -> list[Equation]:
         return list(map(Equation.from_line, f))
 
 
+@aoc2024.expects(12553187650171)
 def part_one(path_to_input: str) -> int:
     equations = get_equations(path_to_input=path_to_input)
     return sum(
@@ -59,6 +60,7 @@ def concat(a: int, b: int) -> int:
 
 
 @aoc2024.skip_slow
+@aoc2024.expects(96779702119491)
 def part_two(path_to_input: str) -> int:
     equations = get_equations(path_to_input=path_to_input)
     return sum(
