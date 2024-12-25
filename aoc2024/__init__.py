@@ -3,12 +3,12 @@ import os
 import typing
 
 
-def expects(expected: int):
+def expects(expected: int | str):
     def decorator(f):
         @functools.wraps(f)
         def inner(*args, **kwargs):
             if (ret := f(*args, **kwargs)) != expected:
-                raise ValueError(f"{expected=:d} but got {ret=:d} instead")
+                raise ValueError(f"{expected=!r} but got {ret=!r} instead")
             else:
                 return ret
 
