@@ -1,14 +1,14 @@
 import argparse
-import pathlib
+import collections.abc
 import importlib
 import os
+import pathlib
 import types
-import typing
 
 import aoc2024
 
 
-def iter_day_module() -> typing.Iterator[tuple[int, types.ModuleType]]:
+def iter_day_module() -> collections.abc.Iterator[tuple[int, types.ModuleType]]:
     for path in pathlib.Path(__file__).parent.glob("day*.py"):
         name = path.with_suffix("").name
         _, _, day = name.partition("day")
